@@ -1,42 +1,30 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  TextInput,
   StatusBar,
   Animated,
   Platform,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { Search, Book } from 'lucide-react-native';
+import { Heart, Book } from 'lucide-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { hymns } from '@/mocks/hymns';
+import { useFavorites } from '@/contexts/FavoritesContext';
 
-export default function HomeScreen() {
+export default function FavoritesScreen() {
+  
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { theme, colors } = useTheme();
   const { t } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const filteredHymns = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return hymns;
-    }
-    return hymns.filter((hymn) => {
-      const query = searchQuery.toLowerCase();
-      return (
-        hymn.number.toString().includes(query) ||
-        hymn.title.toLowerCase().includes(query)
-      );
-    });
-  }, [searchQuery]);
+  const { favorites } = useFavorites();
 
   const handleHymnPress = (id: number) => {
     if (Platform.OS !== 'web') {
@@ -44,6 +32,8 @@ export default function HomeScreen() {
     }
     router.push(`/hymn/${id}`);
   };
+
+  const favoriteHymns = hymns.filter((hymn) => favorites.includes(hymn.id));
 
   const HymnCard = ({ item, index }: { item: typeof hymns[0]; index: number }) => {
     const scaleValue = useRef(new Animated.Value(1)).current;
@@ -116,6 +106,7 @@ export default function HomeScreen() {
                 </View>
               )}
             </View>
+            <Heart color={colors.deepRed} size={22} strokeWidth={2} fill={colors.deepRed} />
           </View>
           <View style={[styles.cardDecoration, { backgroundColor: colors.gold }]} />
         </TouchableOpacity>
@@ -134,62 +125,54 @@ export default function HomeScreen() {
         <View style={[styles.headerPadding, { paddingTop: insets.top + 16, backgroundColor: colors.accent }]}>
           <View style={styles.header}>
             <View style={styles.titleContainer}>
-              <Book
+                <Heart
                 color={theme === 'light' ? colors.gold : colors.cream}
                 size={32}
-                strokeWidth={2.5}
+                strokeWidth={2}
                 />
               <View style={styles.titleTextContainer}>
                     <Text
-                    style={[styles.headerTitle, { color: theme === 'light' ? colors.gold : colors.cream }]}
-                    >
-                    {t('appTitle')}
+                      style={[
+                          styles.headerTitle,
+                          { color: theme === 'light' ? colors.gold : colors.cream }
+                      ]}
+                      >
+                      {t('favorites')}
                     </Text>                
-                    <Text style={[styles.headerSubtitle, { color: colors.cream }]}>{t('appSubtitle')}</Text>
+                    <Text style={[styles.headerSubtitle, { color: colors.cream }]}>{t('savedSongs')}</Text>
               </View>
             </View>
-            <Text style={[styles.headerDescription, { color: colors.cream, opacity: 0.9 }]}>
-              {t('appDescription')}
-            </Text>
           </View>
         </View>
       </View>
 
       <View style={styles.content}>
-        <View
-          style={[
-            styles.searchContainer,
-            {
-              backgroundColor: colors.cardBackground,
-              borderColor: colors.border,
-              shadowColor: colors.shadow,
-            },
-          ]}
-        >
-          <Search color={colors.accent} size={20} style={styles.searchIcon} />
-          <TextInput
-            style={[styles.searchInput, { color: colors.text }]}
-            placeholder={t('searchPlaceholder')}
-            placeholderTextColor={colors.placeholderText}
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-          />
-        </View>
+        {favoriteHymns.length === 0 ? (
+          <View style={styles.emptyState}>
+            <Book color={colors.border} size={64} strokeWidth={1.5} />
+            <Text style={[styles.emptyTitle, { color: colors.text }]}>{t('noFavorites')}</Text>
+            <Text style={[styles.emptyDescription, { color: colors.secondaryText }]}>
+              {t('noFavoritesDesc')}
+            </Text>
+          </View>
+        ) : (
+          <>
+            <View style={styles.statsContainer}>
+              <Text style={[styles.statsText, { color: colors.accent, opacity: 0.8 }]}>
+                {favoriteHymns.length}{' '}
+                {favoriteHymns.length === 1 ? t('favoriteCountSingle') : t('favoriteCount')}
+              </Text>
+            </View>
 
-        <View style={styles.statsContainer}>
-          <Text style={[styles.statsText, { color: colors.accent, opacity: 0.8 }]}>
-            {filteredHymns.length}{' '}
-            {filteredHymns.length === 1 ? t('songCount') : t('songsCount')}
-          </Text>
-        </View>
-
-        <FlatList
-          data={filteredHymns}
-          renderItem={renderHymn}
-          keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={styles.listContainer}
-          showsVerticalScrollIndicator={false}
-        />
+            <FlatList
+              data={favoriteHymns}
+              renderItem={renderHymn}
+              keyExtractor={(item) => item.id.toString()}
+              contentContainerStyle={styles.listContainer}
+              showsVerticalScrollIndicator={false}
+            />
+          </>
+        )}
       </View>
     </View>
   );
@@ -212,7 +195,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
-    marginBottom: 8,
   },
   titleTextContainer: {
     flex: 1,
@@ -227,38 +209,13 @@ const styles = StyleSheet.create({
     marginTop: 2,
     fontWeight: '500' as const,
   },
-  headerDescription: {
-    fontSize: 14,
-    opacity: 0.9,
-  },
   content: {
     flex: 1,
     paddingTop: 20,
   },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 12,
-    borderWidth: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  searchIcon: {
-    marginRight: 8,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-  },
   statsContainer: {
     paddingHorizontal: 20,
-    paddingVertical: 16,
+    paddingBottom: 12,
   },
   statsText: {
     fontSize: 14,
@@ -281,6 +238,7 @@ const styles = StyleSheet.create({
   cardContent: {
     flexDirection: 'row',
     padding: 20,
+    alignItems: 'center',
   },
   cardDecoration: {
     position: 'absolute' as const,
@@ -330,5 +288,22 @@ const styles = StyleSheet.create({
     fontStyle: 'italic' as const,
     opacity: 0.85,
     flex: 1,
+  },
+  emptyState: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 40,
+  },
+  emptyTitle: {
+    fontSize: 20,
+    fontWeight: '700' as const,
+    marginTop: 20,
+    marginBottom: 8,
+  },
+  emptyDescription: {
+    fontSize: 15,
+    textAlign: 'center',
+    lineHeight: 22,
   },
 });
