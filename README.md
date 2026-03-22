@@ -1,4 +1,4 @@
-# SirbaWaaqa
+# Waaqa Faarsina
 
 # Welcome to your Expo app 👋
 
