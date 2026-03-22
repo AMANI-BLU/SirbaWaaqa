@@ -6,18 +6,20 @@ import { Stack, useLocalSearchParams } from 'expo-router';
 import { Book, Heart } from 'lucide-react-native';
 import React, { useCallback } from 'react';
 import {
-    Platform,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  Platform,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function HymnDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { theme, colors } = useTheme();
+  const insets = useSafeAreaInsets();
   const hymn = hymns.find((h) => h.id === Number(id));
   const { isFavorite, toggleFavorite } = useFavorites();
 
@@ -68,7 +70,7 @@ export default function HymnDetailScreen() {
 
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: Math.max(insets.bottom, 20) }]}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.contentContainer}>
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
   },
   lyricsContainer: {
     paddingHorizontal: 20,
-    paddingVertical:20
+    paddingVertical: 20
   },
   lyricLine: {
     fontSize: 18,

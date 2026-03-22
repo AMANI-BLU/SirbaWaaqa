@@ -1,17 +1,17 @@
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { AlertCircle, AtSign, Book, Globe, Info, Mail, Moon, Phone, Smartphone, Sun, User } from 'lucide-react-native';
 import React from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
+  Linking,
   ScrollView,
   StatusBar,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-  Linking,
+  View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Info, Book, Mail, Moon, Sun, Smartphone, Globe, AlertCircle, User, Phone, AtSign } from 'lucide-react-native';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AboutScreen() {
   const insets = useSafeAreaInsets();
@@ -29,21 +29,21 @@ export default function AboutScreen() {
         <View style={[styles.headerPadding, { paddingTop: insets.top + 16, backgroundColor: colors.accent }]}>
           <View style={styles.header}>
             <View style={styles.titleContainer}>
-            <Info
-            color={theme === 'light' ? colors.gold : colors.cream}
-            size={32}
-            strokeWidth={2}
-            />
+              <Info
+                color={theme === 'light' ? colors.gold : colors.cream}
+                size={32}
+                strokeWidth={2}
+              />
               <View style={styles.titleTextContainer}>
 
-                    <Text
-                    style={[
-                        styles.headerTitle,
-                        { color: theme === 'light' ? colors.gold : colors.cream }
-                    ]}
-                    >
-                    {t('about')}
-                    </Text>
+                <Text
+                  style={[
+                    styles.headerTitle,
+                    { color: theme === 'light' ? colors.gold : colors.cream }
+                  ]}
+                >
+                  {t('about')}
+                </Text>
 
                 <Text style={[styles.headerSubtitle, { color: colors.cream }]}>{t('appTitle')}</Text>
               </View>
@@ -170,7 +170,7 @@ export default function AboutScreen() {
             </View>
             <Text style={[styles.developerName, { color: colors.text }]}>Amanuel Solomon</Text>
             <Text style={[styles.developerRole, { color: colors.accent }]}>{t('madeWithLove')}</Text>
-            
+
             <View style={styles.contactInfoContainer}>
               <TouchableOpacity
                 style={[styles.contactInfoButton, { backgroundColor: colors.cream }]}
@@ -237,11 +237,12 @@ export default function AboutScreen() {
           </Text>
         </View>
 
-        <View style={styles.bottomSpacer} />
+        <View style={{ height: Math.max(insets.bottom, 20) }} />
       </ScrollView>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
