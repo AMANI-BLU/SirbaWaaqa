@@ -1,122 +1,42 @@
-import React, { useRef, useEffect } from 'react';
+import { HymnCard } from '@/components/HymnCard';
+import { useFavorites } from '@/contexts/FavoritesContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { hymns } from '@/mocks/hymns';
+import * as Haptics from 'expo-haptics';
+import { useRouter } from 'expo-router';
+import { Book, Heart } from 'lucide-react-native';
+import React, { useCallback } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
   FlatList,
-  TouchableOpacity,
-  StatusBar,
-  Animated,
   Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
-import { Heart, Book } from 'lucide-react-native';
-import * as Haptics from 'expo-haptics';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { hymns } from '@/mocks/hymns';
-import { useFavorites } from '@/contexts/FavoritesContext';
 
 export default function FavoritesScreen() {
-  
+
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { theme, colors } = useTheme();
   const { t } = useLanguage();
   const { favorites } = useFavorites();
 
-  const handleHymnPress = (id: number) => {
+  const handleHymnPress = useCallback((id: number) => {
     if (Platform.OS !== 'web') {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     }
     router.push(`/hymn/${id}`);
-  };
+  }, [router]);
 
   const favoriteHymns = hymns.filter((hymn) => favorites.includes(hymn.id));
 
-  const HymnCard = ({ item, index }: { item: typeof hymns[0]; index: number }) => {
-    const scaleValue = useRef(new Animated.Value(1)).current;
-    const fadeValue = useRef(new Animated.Value(0)).current;
-
-    useEffect(() => {
-      Animated.timing(fadeValue, {
-        toValue: 1,
-        duration: 400,
-        delay: index * 50,
-        useNativeDriver: true,
-      }).start();
-    }, []);
-
-    const handlePressIn = () => {
-      Animated.spring(scaleValue, {
-        toValue: 0.97,
-        useNativeDriver: true,
-        speed: 50,
-        bounciness: 4,
-      }).start();
-    };
-
-    const handlePressOut = () => {
-      Animated.spring(scaleValue, {
-        toValue: 1,
-        useNativeDriver: true,
-        speed: 50,
-        bounciness: 4,
-      }).start();
-    };
-
-    return (
-      <Animated.View
-        style={{
-          transform: [{ scale: scaleValue }],
-          opacity: fadeValue,
-        }}
-      >
-        <TouchableOpacity
-          style={[
-            styles.hymnCard,
-            {
-              backgroundColor: colors.cardBackground,
-              borderColor: colors.border,
-              shadowColor: colors.shadow,
-            },
-          ]}
-          onPress={() => handleHymnPress(item.id)}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-          activeOpacity={1}
-        >
-          <View style={styles.cardContent}>
-            <View style={[styles.hymnNumber, { backgroundColor: colors.accent }]}>
-              <Text style={[styles.hymnNumberText, { color: colors.cardBackground }]}>
-                {item.number}
-              </Text>
-            </View>
-            <View style={styles.hymnContent}>
-              <Text style={[styles.hymnTitle, { color: colors.text }]} numberOfLines={2}>
-                {item.title}
-              </Text>
-              {item.englishTranslation && (
-                <View style={styles.translationContainer}>
-                  <Text style={[styles.translationLabel, { color: colors.accent, opacity: 0.6 }]}>•</Text>
-                  <Text style={[styles.hymnTranslation, { color: colors.accent }]} numberOfLines={1}>
-                    {item.englishTranslation}
-                  </Text>
-                </View>
-              )}
-            </View>
-            <Heart color={colors.deepRed} size={22} strokeWidth={2} fill={colors.deepRed} />
-          </View>
-          <View style={[styles.cardDecoration, { backgroundColor: colors.gold }]} />
-        </TouchableOpacity>
-      </Animated.View>
-    );
-  };
-
-  const renderHymn = ({ item, index }: { item: typeof hymns[0]; index: number }) => (
-    <HymnCard item={item} index={index} />
-  );
+  const renderHymn = useCallback(({ item, index }: { item: typeof hymns[0]; index: number }) => (
+    <HymnCard item={item} index={index} onPress={handleHymnPress} isFavorite={true} />
+  ), [handleHymnPress]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -125,21 +45,21 @@ export default function FavoritesScreen() {
         <View style={[styles.headerPadding, { paddingTop: insets.top + 16, backgroundColor: colors.accent }]}>
           <View style={styles.header}>
             <View style={styles.titleContainer}>
-                <Heart
+              <Heart
                 color={theme === 'light' ? colors.gold : colors.cream}
                 size={32}
                 strokeWidth={2}
-                />
+              />
               <View style={styles.titleTextContainer}>
-                    <Text
-                      style={[
-                          styles.headerTitle,
-                          { color: theme === 'light' ? colors.gold : colors.cream }
-                      ]}
-                      >
-                      {t('favorites')}
-                    </Text>                
-                    <Text style={[styles.headerSubtitle, { color: colors.cream }]}>{t('savedSongs')}</Text>
+                <Text
+                  style={[
+                    styles.headerTitle,
+                    { color: theme === 'light' ? colors.gold : colors.cream }
+                  ]}
+                >
+                  {t('favorites')}
+                </Text>
+                <Text style={[styles.headerSubtitle, { color: colors.cream }]}>{t('savedSongs')}</Text>
               </View>
             </View>
           </View>
@@ -170,6 +90,10 @@ export default function FavoritesScreen() {
               keyExtractor={(item) => item.id.toString()}
               contentContainerStyle={styles.listContainer}
               showsVerticalScrollIndicator={false}
+              initialNumToRender={10}
+              maxToRenderPerBatch={10}
+              windowSize={5}
+              removeClippedSubviews={Platform.OS === 'android'}
             />
           </>
         )}

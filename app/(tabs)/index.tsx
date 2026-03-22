@@ -1,22 +1,21 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { HymnCard } from '@/components/HymnCard';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { hymns } from '@/mocks/hymns';
+import * as Haptics from 'expo-haptics';
+import { useRouter } from 'expo-router';
+import { Book, Search } from 'lucide-react-native';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
   FlatList,
-  TouchableOpacity,
-  TextInput,
-  StatusBar,
-  Animated,
   Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
-import { Search, Book } from 'lucide-react-native';
-import * as Haptics from 'expo-haptics';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { hymns } from '@/mocks/hymns';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -38,94 +37,16 @@ export default function HomeScreen() {
     });
   }, [searchQuery]);
 
-  const handleHymnPress = (id: number) => {
+  const handleHymnPress = useCallback((id: number) => {
     if (Platform.OS !== 'web') {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     }
     router.push(`/hymn/${id}`);
-  };
+  }, [router]);
 
-  const HymnCard = ({ item, index }: { item: typeof hymns[0]; index: number }) => {
-    const scaleValue = useRef(new Animated.Value(1)).current;
-    const fadeValue = useRef(new Animated.Value(0)).current;
-
-    useEffect(() => {
-      Animated.timing(fadeValue, {
-        toValue: 1,
-        duration: 400,
-        delay: index * 50,
-        useNativeDriver: true,
-      }).start();
-    }, []);
-
-    const handlePressIn = () => {
-      Animated.spring(scaleValue, {
-        toValue: 0.97,
-        useNativeDriver: true,
-        speed: 50,
-        bounciness: 4,
-      }).start();
-    };
-
-    const handlePressOut = () => {
-      Animated.spring(scaleValue, {
-        toValue: 1,
-        useNativeDriver: true,
-        speed: 50,
-        bounciness: 4,
-      }).start();
-    };
-
-    return (
-      <Animated.View
-        style={{
-          transform: [{ scale: scaleValue }],
-          opacity: fadeValue,
-        }}
-      >
-        <TouchableOpacity
-          style={[
-            styles.hymnCard,
-            {
-              backgroundColor: colors.cardBackground,
-              borderColor: colors.border,
-              shadowColor: colors.shadow,
-            },
-          ]}
-          onPress={() => handleHymnPress(item.id)}
-          onPressIn={handlePressIn}
-          onPressOut={handlePressOut}
-          activeOpacity={1}
-        >
-          <View style={styles.cardContent}>
-            <View style={[styles.hymnNumber, { backgroundColor: colors.accent }]}>
-              <Text style={[styles.hymnNumberText, { color: colors.cardBackground }]}>
-                {item.number}
-              </Text>
-            </View>
-            <View style={styles.hymnContent}>
-              <Text style={[styles.hymnTitle, { color: colors.text }]} numberOfLines={2}>
-                {item.title}
-              </Text>
-              {item.englishTranslation && (
-                <View style={styles.translationContainer}>
-                  <Text style={[styles.translationLabel, { color: colors.accent, opacity: 0.6 }]}>•</Text>
-                  <Text style={[styles.hymnTranslation, { color: colors.accent }]} numberOfLines={1}>
-                    {item.englishTranslation}
-                  </Text>
-                </View>
-              )}
-            </View>
-          </View>
-          <View style={[styles.cardDecoration, { backgroundColor: colors.gold }]} />
-        </TouchableOpacity>
-      </Animated.View>
-    );
-  };
-
-  const renderHymn = ({ item, index }: { item: typeof hymns[0]; index: number }) => (
-    <HymnCard item={item} index={index} />
-  );
+  const renderHymn = useCallback(({ item, index }: { item: typeof hymns[0]; index: number }) => (
+    <HymnCard item={item} index={index} onPress={handleHymnPress} />
+  ), [handleHymnPress]);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -138,14 +59,14 @@ export default function HomeScreen() {
                 color={theme === 'light' ? colors.gold : colors.cream}
                 size={32}
                 strokeWidth={2.5}
-                />
+              />
               <View style={styles.titleTextContainer}>
-                    <Text
-                    style={[styles.headerTitle, { color: theme === 'light' ? colors.gold : colors.cream }]}
-                    >
-                    {t('appTitle')}
-                    </Text>                
-                    <Text style={[styles.headerSubtitle, { color: colors.cream }]}>{t('appSubtitle')}</Text>
+                <Text
+                  style={[styles.headerTitle, { color: theme === 'light' ? colors.gold : colors.cream }]}
+                >
+                  {t('appTitle')}
+                </Text>
+                <Text style={[styles.headerSubtitle, { color: colors.cream }]}>{t('appSubtitle')}</Text>
               </View>
             </View>
             <Text style={[styles.headerDescription, { color: colors.cream, opacity: 0.9 }]}>
@@ -189,6 +110,10 @@ export default function HomeScreen() {
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.listContainer}
           showsVerticalScrollIndicator={false}
+          initialNumToRender={10}
+          maxToRenderPerBatch={10}
+          windowSize={5}
+          removeClippedSubviews={Platform.OS === 'android'}
         />
       </View>
     </View>
