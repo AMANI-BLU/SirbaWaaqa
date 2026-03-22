@@ -3816,6 +3816,7 @@ export const hymns: Hymn[] = [
     title: "Yeso Kriston aka jed'e",
     englishTranslation: "The good samaritan",
     lyrics: [
+      "Yeso Kriston aka jed'e",
       "Nama seera tokooni,",
       "Olla kanke aka ati",
       "Ufi feetu jaalad'u.",
@@ -3877,6 +3878,7 @@ export const hymns: Hymn[] = [
     title: "Yeso Kriston ato jiru",
     englishTranslation: "Our blest redeemer",
     lyrics: [
+      "Yeso Kriston ato jiru",
       "Lafa tana keesa,",
       "Qarqaarsa d'ibi inerga",
       "Naman jed'e.",
@@ -3908,7 +3910,7 @@ export const hymns: Hymn[] = [
     title: "Yeso Kristoni",
     englishTranslation: "Jesus bids us shine",
     lyrics: [
-      "ifsa nuun jed'e.",
+      "Yeso Kristoni ifsa nuun jed'e.",
       "Lafti tun dukana, nu ifsu malle;",
       "Aka billit'u halkani bobetu,",
       "Maro isatiifi illakimnu.",
@@ -3930,7 +3932,7 @@ export const hymns: Hymn[] = [
     number: 109,
     title: "Yeso male manti dansa",
     lyrics: [
-      "nu gubba woliin gala, jireena hegeri arganna.",
+      "Yeso male manti dansa nu gubba woliin gala, jireena hegeri arganna.",
       "",
       "Ilmi Waaqa baasan keena",
       "ya d'alate,",
