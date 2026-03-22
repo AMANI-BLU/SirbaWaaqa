@@ -5050,6 +5050,214 @@ export const hymns: Hymn[] = [
       "Ani indeema Yeso gula deema,",
       "Fulla inni deemu isa hord'ofa."
     ]
+  },
+  {
+    id: 143,
+    number: 143,
+    title: "Ani ingammada",
+    englishTranslation: "I am happy",
+    lyrics: [
+      "Ani ingammada",
+      "Ani ingammada,",
+      "Guyya ch'ufa, fulla ch'ufa,",
+      "Ani ingammada.",
+      "",
+      "Yeson jaala kiyya,",
+      "Yeson jaala kiyya,",
+      "Tanaafi ani ingammada,",
+      "Yeson jaala kiyya.",
+      "",
+      "Daba kiyya baase,",
+      "Daba kiyya baase,",
+      "Ani layu d'ugefad'e",
+      "Aka daba baase.",
+      "",
+      "Ani ingammada,",
+      "Yeson jaala kiyya,",
+      "Layu daba kiyya baase,",
+      "Tanaafi gammada."
+    ]
+  },
+  {
+    id: 144,
+    number: 144,
+    title: "Balbalti tokotu",
+    englishTranslation: "One door",
+    lyrics: [
+      "Balbalti tokotu",
+      "ammo d'aatu lama,",
+      "Keesafi ala, d'aatu tam atin?",
+      "Balbalti tokotu, ammo d'aatu lama,",
+      "Ani keesati, atin d'aatu tam?"
+    ]
+  },
+  {
+    id: 145,
+    number: 145,
+    title: "Dabi diqole si indabsatu",
+    englishTranslation: "Sin shall not",
+    lyrics: [
+      "Dabi diqole si indabsatu",
+      "Dubbin tuni dansaafi d'uga;",
+      "Waaqi laya nuun jed'e,",
+      "Nuleeni jechu malle,",
+      "Dabi diqole si indabsatu."
+    ]
+  },
+  {
+    id: 146,
+    number: 146,
+    title: "Eeba tante hedad'u ch'ufa",
+    englishTranslation: "Count your blessings",
+    lyrics: [
+      "Eeba tante hedad'u ch'ufa",
+      "Eeba tante hedad'u ch'ufa;",
+      "Ch'ufa hed'i, maqale d'ai,",
+      "Atin guddo mamta",
+      "waan eeba teeti."
+    ]
+  },
+  {
+    id: 147,
+    number: 147,
+    title: "Fuula Yeso dawad'u",
+    englishTranslation: "Turn your eyes",
+    lyrics: [
+      "Fuula Yeso dawad'u",
+      "Isuma guddo ilaali;",
+      "Wonti lafa hamtun imbaleti,",
+      "Waan Yeso yo guddo qaabatte."
+    ]
+  },
+  {
+    id: 148,
+    number: 148,
+    title: "Gammada ani guddo",
+    lyrics: [
+      "Gammada ani guddo",
+      "gammada,",
+      "Waan Yesoni na jaalatefi;",
+      "Daba ya na lakise,",
+      "Gubbati na fuud'ale,",
+      "Tanaafi garan kiyya guddo",
+      "gammada."
+    ]
+  },
+  {
+    id: 149,
+    number: 149,
+    title: "Guyya ch'ufa ijarra",
+    englishTranslation: "We are building day by day",
+    lyrics: [
+      "Guyya ch'ufa ijarra",
+      "Ato dakikan dabru,",
+      "Mana dansa ka immullanne;",
+      "Yo waan hamtu dabsanne,",
+      "D'akhuma iti darra",
+      "Mana ka hegeri suniti."
+    ]
+  },
+  {
+    id: 150,
+    number: 150,
+    title: "Haga Kalvaritile",
+    englishTranslation: "All the way to Calvary",
+    lyrics: [
+      "Haga Kalvaritile",
+      "naafi deeme,",
+      "Naafi deeme, naafi deeme;",
+      "Haga Kalvaritile naafi deeme",
+      "Daba na hikhufi."
+    ]
+  },
+  {
+    id: 151,
+    number: 151,
+    title: "Ila lama Waaqa laaltu",
+    englishTranslation: "Two little eyes",
+    lyrics: [
+      "Ila lama Waaqa laaltu",
+      "Gurra lama ka d'agau,",
+      "Miila lama ka hord'ofu,",
+      "Hidi lama ta guddiftu,",
+      "Harka lama ka hojatu,",
+      "Lubbu tokole ta jaalatu."
+    ]
+  },
+  {
+    id: 152,
+    number: 152,
+    title: "Kitaabu Waaqati waan dansa",
+    englishTranslation: "The best friend",
+    lyrics: [
+      "Kitaabu Waaqati waan dansa",
+      "Kitaabu Waaqati waan dansa;",
+      "ka guyya ch'ufa somu,",
+      "sunini indad'abu;",
+      "Ee, Kitaabu Waaqati waan dansa.",
+      "",
+      "Yeson jaala kiyya dansa,",
+      "Yeson jaala kiyya dansa;",
+      "Yo yaame na d'agaya,",
+      "Yo jige na qarqaara;",
+      "Ee, Yeson jaala kiyya dansa."
+    ]
+  },
+  {
+    id: 153,
+    number: 153,
+    title: "Na gula yoyu d'uftani",
+    englishTranslation: "I will make you fisher of men",
+    lyrics: [
+      "Na gula yoyu d'uftani",
+      "Yo d'uftani, yo d'uftani,",
+      "Akuma nama qabdani",
+      "Issani tolcha;",
+      "Fulla qurtumi, fulla qurtumi,",
+      "Aka nama na qabdani,",
+      "ani intolcha."
+    ]
+  },
+  {
+    id: 154,
+    number: 154,
+    title: "Nuti ijoolle, Abba tokocha",
+    lyrics: [
+      "Nuti ijoolle, Abba tokocha",
+      "kara Yesosi maafi irra gorra?",
+      "Yaada tokocha nu yaame, Goftan,",
+      "Gofta hooliye laalu mokorra."
+    ]
+  },
+  {
+    id: 155,
+    number: 155,
+    title: "Qita Jireena inyaad'a",
+    englishTranslation: "I'm feeding on the living bread",
+    lyrics: [
+      "Qita Jireena inyaad'a",
+      "Bisaan Jireena ind'uga,",
+      "Malifi Yeson waan jed'e,",
+      "Ka d'ugu ind'eebotule.",
+      "D'uguma ind'eebonne?",
+      "D'uguma ind'eebotu;",
+      "D'uguma ind'eebonne?",
+      "D'uguma ind'eebotu;",
+      "Malifi Yeson waan jed'e,",
+      "Deebietin ind'eebotu."
+    ]
+  },
+  {
+    id: 156,
+    number: 156,
+    title: "Waaqa faarsa ka eebisu",
+    englishTranslation: "Praise God",
+    lyrics: [
+      "Waaqa faarsa ka eebisu",
+      "Nami ch'ufti Waaqa faarsa;",
+      "Malaikaleen ha faarsitu,",
+      "Abba, Ilma, Lubbu, ch'ufa."
+    ]
   }
 ];
 
