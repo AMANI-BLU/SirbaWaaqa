@@ -5258,8 +5258,113 @@ export const hymns: Hymn[] = [
       "Malaikaleen ha faarsitu,",
       "Abba, Ilma, Lubbu, ch'ufa."
     ]
+  },
+  {
+    id: 157,
+    number: 157,
+    title: "Yeso male ani inqufu,",
+    englishTranslation: "Now none but Christ",
+    lyrics: [
+      "Yeso male ani inqufu,",
+      "Ka d'ibi imfeed'u;",
+      "Jireenaf gammadi guddan",
+      "Isa woliin jira."
+    ]
+  },
+  {
+    id: 158,
+    number: 158,
+    title: "Yeson bisaan kenne",
+    englishTranslation: "Jesus gave her water",
+    lyrics: [
+      "Yeson bisaan kenne",
+      "Ka eela intahin;",
+      "Yeson bisaan kenne",
+      "Ka eela intahin;",
+      "Gammadan galte,",
+      "Ka d'ibi yaamte,",
+      "Bisaan argatani,",
+      "Ka eela intahin."
+    ]
+  },
+  {
+    id: 159,
+    number: 159,
+    title: "Yeson gaafa lafa d'ufe,",
+    englishTranslation: "He did not come to judge",
+    lyrics: [
+      "Yeson gaafa lafa d'ufe,",
+      "Qorsumafiniti;",
+      "Ammo nama baasu d'ufe,",
+      "Harka Sheet'anati;",
+      "Yo Yeson isan jenne,",
+      "Akuma dansa jenna,",
+      "Malifi Yeson jechani",
+      "Aka Qarqaarsati."
+    ]
+  },
+  {
+    id: 160,
+    number: 160,
+    title: "Yeson si dandesise,",
+    englishTranslation: "He can break every fetter",
+    lyrics: [
+      "Yeson si dandesise,",
+      "Daba keesa si baase,",
+      "Inuma si jabeesa,",
+      "Yo d'ugefatte."
+    ]
+  },
+  {
+    id: 161,
+    number: 161,
+    title: "Yesoni guddo jaalata",
+    englishTranslation: "Jesus loves the little children",
+    lyrics: [
+      "Yesoni guddo jaalata",
+      "Ijoolle lafa ch'ufa;",
+      "Guguratif adile,",
+      "Ch'ufuma inni fed'a,",
+      "Inni ijoolle didiqo jaalata."
+    ]
+  },
+  {
+    id: 162,
+    number: 162,
+    title: "Yo hasomne Yeso",
+    englishTranslation: "A little talk with Jesus",
+    lyrics: [
+      "Yo hasomne Yeso",
+      "woliini waan dansa,",
+      "Yo hasomne Yeso",
+      "woliini waan dansa,",
+      "D'ipuf rako keesa isa nu",
+      "qarqaara,",
+      "Yo hasomne Yeso",
+      "woliini waan dansa."
+    ]
+  },
+  {
+    id: 163,
+    number: 163,
+    title: "Zakayoni nama gababa,",
+    englishTranslation: "Zaccheus was a little man",
+    lyrics: [
+      "Zakayoni nama gababa,",
+      "Nama gababa toko;",
+      "Inni mukhuma gubba kore,",
+      "Aka Yeso inni argu,",
+      "Aka Yeso inni argu.",
+      "",
+      "Yo Yesoni kara dabre",
+      "Inni gubba millate;",
+      "Zakayo hurisi gabui,",
+      "Sila shai woliin d'unna jed'e,",
+      "Sila shai woliin d'unna jed'e."
+    ]
   }
 ];
+
 
 
 
