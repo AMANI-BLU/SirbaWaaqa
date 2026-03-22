@@ -4902,8 +4902,157 @@ export const hymns: Hymn[] = [
       "Hid'ansa ch'irreti",
       "Keesa bahe."
     ]
+  },
+  {
+    id: 137,
+    number: 137,
+    title: "Eegi lafa qonne",
+    englishTranslation: "Bringing in the sheaves",
+    lyrics: [
+      "Eegi lafa qonne",
+      "Obru teena keesa,",
+      "Mid'aani fach'amne",
+      "Waaqa eeganna;",
+      "Yo mid'aan bahani,",
+      "Nu aramu malle,",
+      "Gaafa bilchatani",
+      "Inuma murra.",
+      "",
+      "Mid'aan banani,",
+      "Mid'aan banani,",
+      "Nu guddo gammanna",
+      "Mid'aan banani.",
+      "",
+      "Yo mammasa gula,",
+      "Mid'aan dubbi Waaqa",
+      "Gara nama keesa,",
+      "Ka fach'asani:",
+      "Aka Aabbon keena,",
+      "Duri nu barsiise,",
+      "Ch'ufa ka obrani",
+      "Woma imbaasu.",
+      "",
+      "Akuma alati,",
+      "Ta mid'aan guurattu,",
+      "Sheet'ani nu eege",
+      "Sila iyaka;",
+      "Ammo yo jabaanne,",
+      "Kristo d'ugefanne,",
+      "Mid'aan dansa bamne",
+      "Guddo gammanna."
+    ]
+  },
+  {
+    id: 138,
+    number: 138,
+    title: "Nuti qote fach'asa",
+    englishTranslation: "We plough the fields",
+    lyrics: [
+      "Nuti qote fach'asa",
+      "Mid'aan obru keesa,",
+      "Ammo Waaqati tisse",
+      "Bokaya nu rooba;",
+      "Hagayaf ganna gudda",
+      "Isati nu erga,",
+      "Qileensafi adule,",
+      "Sora ta bokaya.",
+      "",
+      "Waan dansa ch'ufuma",
+      "Gubba ira arganna;",
+      "Tanaafi Waaqa galata,",
+      "Maro waan ch'ufuma.",
+      "",
+      "Isa kofa wo uume,",
+      "Gubbafi lafale,",
+      "Hori nu gamnu ch'ufaf",
+      "Urji ta ifsitu;",
+      "Bubbefi galani ch'ufti",
+      "isuma d'agaya;",
+      "Ka simpirre nyaachisu",
+      "Eesa nu d'owata?",
+      "",
+      "Maro waan dansa ch'ufa",
+      "Galata deebimna,",
+      "Mid'aani bilchataniifi",
+      "Fayyafi jabeena;",
+      "Galata kana fuud'u,",
+      "Ka nu si deebimnu,",
+      "Waan ira feetu sule,",
+      "Gara keena fuud'u."
+    ]
+  },
+  {
+    id: 139,
+    number: 139,
+    title: "Aabbo, hooliye nyaachisi",
+    lyrics: [
+      "Aabbo, hooliye nyaachisi",
+      "Ibsa nu kennite.",
+      "Aabbo, hooliye nyaachisi.",
+      "Kara nu marate.",
+      "Aabbo, hooliye nyaachisi.",
+      "Ibsa nu ergite.",
+      "Aabbo, hooliye nyaachisi.",
+      "Kara keeti nu baasi.",
+      "Aabbo, hooliye nyaachisi.",
+      "Gammada gubba nu kenni.",
+      "Aabbo, hooliye nyaachisi.",
+      "",
+      "Hooliye nyaachisi, hooliye obaasi,",
+      "Aabbo, hooliye te tissi.",
+      "Tissitu jireena nu tolchi,",
+      "d'ageetu jireena nu tolchi!",
+      "Aabbo, nuti d'iaad'i,",
+      "nu woliin jiraad'i,",
+      "gubba woliin deemna",
+      "fulla tanteeti."
+    ]
+  },
+  {
+    id: 140,
+    number: 140,
+    title: "Aka gammadu",
+    englishTranslation: "Keep me shining Lord",
+    lyrics: [
+      "Aka gammadu",
+      "na tolchi, Aabbo,",
+      "Waan ch'ufa keesati;",
+      "Nami na argu arginnani,",
+      "Aka si jaalatu."
+    ]
+  },
+  {
+    id: 141,
+    number: 141,
+    title: "Andarean Yeso d'ufe",
+    englishTranslation: "Andrew calls his brother",
+    lyrics: [
+      "Andarean Yeso d'ufe",
+      "Isa d'ugefate;",
+      "Eege oboleesa ufi",
+      "Simon Petro yaame.",
+      "",
+      "Oboleesa kanke yaami,",
+      "Ha si woliin d'ufu;",
+      "Dubbi Waaqa d'agennani",
+      "Aka d'ugefatu."
+    ]
+  },
+  {
+    id: 142,
+    number: 142,
+    title: "Ani indeema",
+    englishTranslation: "Follow, follow",
+    lyrics: [
+      "Ani indeema",
+      "Yeso gula deema,",
+      "Yo inni na yaame, inuma deema;",
+      "Ani indeema Yeso gula deema,",
+      "Fulla inni deemu isa hord'ofa."
+    ]
   }
 ];
+
 
 
 
