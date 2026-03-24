@@ -21,12 +21,14 @@ const translations: Translations = {
   tabSongs: { en: 'Songs', om: 'Faarfannaa' },
   tabFavorites: { en: 'Favorites', om: 'Jaallatamoo' },
   tabAbout: { en: 'About', om: 'Waaʼee' },
+  tabSettings: { en: 'Settings', om: 'Sajata' },
 
   searchPlaceholder: { en: 'Search by number, title...', om: 'Barbaadi lakkoofsa, mataduree...' },
   songsCount: { en: 'songs', om: 'faarfannoota' },
   songCount: { en: 'song', om: 'faarfannaa' },
 
   favorites: { en: 'Favorites', om: 'Jaallatamoo' },
+  settings: { en: 'Settings', om: 'Sajata' },
   savedSongs: { en: 'Your saved songs', om: 'Faarfannoota kee olkaaʼame' },
   noFavorites: { en: 'No Favorites', om: 'Jaallatamoon hin jiru' },
   noFavoritesDesc: { en: 'Tap the heart icon on any song to add it to your favorites', om: 'Faarfannaa kamiyyuu irratti mallattoo onnee tuqiitii jaallatamoo keessanitti idaʼaa' },
@@ -62,6 +64,9 @@ const translations: Translations = {
   foundError: { en: 'Found an Error?', om: 'Dogoggora Argitee?' },
   foundErrorDesc: { en: 'If you find incorrect lyrics or other issues, please let us know. Help us improve this app.', om: 'Yoo jecha dogoggoraa ykn dhimma biroo argite, nutti himaa. Appii kana fooyessuu keessatti nu gargaaraa.' },
   sendReport: { en: 'Send Report', om: 'Gabaasa Ergi' },
+
+  sortNumerical: { en: 'Numerical Order', om: 'Lakkoofsaan' },
+  sortCustom: { en: 'Default Order', om: 'Hubannoo Dhaabbataa' },
 
   footer: { en: 'We hope this app will serve as a tool for worship and spiritual growth in the Oromo community. May God bless you!', om: 'Appiin kun meeshaa waaqeffannaa fi guddina hafuuraa Oromoo keessatti akka taʼu abdii qabna. Waaqayyoo isin haa eebbisu!' },
   blessing: { en: '✝ God bless you ✝', om: '✝ Waaqayyoo si haa eebbisu ✝' },

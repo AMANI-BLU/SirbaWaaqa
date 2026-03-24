@@ -1,7 +1,7 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Tabs } from 'expo-router';
-import { Book, Heart, Info } from 'lucide-react-native';
+import { Book, Heart, Settings } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function TabLayout() {
@@ -19,9 +19,9 @@ export default function TabLayout() {
           backgroundColor: colors.background,
           borderTopColor: colors.border,
           borderTopWidth: 1,
-          height: 50 + insets.bottom,
-          paddingBottom: insets.bottom > 0 ? insets.bottom - 4 : 8,
-          paddingTop: 8,
+          height: 72 + (insets.bottom > 0 ? insets.bottom - 5 : 0),
+          paddingBottom: insets.bottom > 0 ? insets.bottom + 5 : 12,
+          paddingTop: 10,
         },
         tabBarLabelStyle: {
           fontSize: 12,
@@ -48,11 +48,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="about"
+        name="settings"
         options={{
-          title: t('tabAbout'),
+          title: t('tabSettings'),
           tabBarIcon: ({ color, size }) => (
-            <Info color={color} size={size} strokeWidth={2} />
+            <Settings color={color} size={size} strokeWidth={2} />
           ),
         }}
       />

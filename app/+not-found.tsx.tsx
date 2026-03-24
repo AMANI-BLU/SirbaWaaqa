@@ -1,5 +1,6 @@
+import { ThemedText } from '@/components/ThemedText';
 import { Link, Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Colors from '@/constants/colors';
 
 export default function NotFoundScreen() {
@@ -7,9 +8,9 @@ export default function NotFoundScreen() {
     <>
       <Stack.Screen options={{ title: "Not Found" }} />
       <View style={styles.container}>
-        <Text style={styles.title}>Page Not Found</Text>
+        <ThemedText style={styles.title}>Page Not Found</ThemedText>
         <Link href="/" style={styles.link}>
-          <Text style={styles.linkText}>Return to Home</Text>
+          <ThemedText style={styles.linkText}>Return to Home</ThemedText>
         </Link>
       </View>
     </>

@@ -1,18 +1,19 @@
 import { HymnCard } from '@/components/HymnCard';
+import { ThemedText } from '@/components/ThemedText';
+import { CUSTOM_HYMN_ORDER } from '@/constants/hymnOrder';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { hymns } from '@/mocks/hymns';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
-import { Book, Search } from 'lucide-react-native';
-import React, { useCallback, useMemo, useState } from 'react';
+import { ArrowDownUp, Book, Search } from 'lucide-react-native';
+import { useCallback, useMemo, useState } from 'react';
 import {
   FlatList,
   Platform,
-  StatusBar,
   StyleSheet,
-  Text,
   TextInput,
+  TouchableOpacity,
   View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -22,20 +23,42 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const { theme, colors } = useTheme();
   const { t } = useLanguage();
+
+  const [sortOrder, setSortOrder] = useState<'custom' | 'numerical'>('custom');
   const [searchQuery, setSearchQuery] = useState('');
+
+  const sortedHymns = useMemo(() => {
+    const base = [...hymns];
+    if (sortOrder === 'numerical') {
+      return base.sort((a, b) => a.number - b.number);
+    }
+    return base.sort((a, b) => {
+      const idxA = CUSTOM_HYMN_ORDER.indexOf(a.number);
+      const idxB = CUSTOM_HYMN_ORDER.indexOf(b.number);
+
+      // If both are not in custom order, sort numerically
+      if (idxA === -1 && idxB === -1) return a.number - b.number;
+      // If only A is missing, it goes to the end
+      if (idxA === -1) return 1;
+      // If only B is missing, it goes to the end
+      if (idxB === -1) return -1;
+
+      return idxA - idxB;
+    });
+  }, [sortOrder]);
 
   const filteredHymns = useMemo(() => {
     if (!searchQuery.trim()) {
-      return hymns;
+      return sortedHymns;
     }
-    return hymns.filter((hymn) => {
+    return sortedHymns.filter((hymn) => {
       const query = searchQuery.toLowerCase();
       return (
         hymn.number.toString().includes(query) ||
         hymn.title.toLowerCase().includes(query)
       );
     });
-  }, [searchQuery]);
+  }, [searchQuery, sortedHymns]);
 
   const handleHymnPress = useCallback((id: number) => {
     if (Platform.OS !== 'web') {
@@ -50,28 +73,27 @@ export default function HomeScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <StatusBar barStyle={theme === 'light' ? 'dark-content' : 'light-content'} />
       <View style={[styles.headerContainer, { backgroundColor: colors.accent }]}>
-        <View style={[styles.headerPadding, { paddingTop: insets.top + 16, backgroundColor: colors.accent }]}>
+        <View style={[styles.headerPadding, { paddingTop: Math.max(insets.top, 24) + 16, backgroundColor: colors.accent }]}>
           <View style={styles.header}>
             <View style={styles.titleContainer}>
-              <Book
-                color={theme === 'light' ? colors.gold : colors.cream}
-                size={32}
-                strokeWidth={2.5}
-              />
-              <View style={styles.titleTextContainer}>
-                <Text
-                  style={[styles.headerTitle, { color: theme === 'light' ? colors.gold : colors.cream }]}
-                >
-                  {t('appTitle')}
-                </Text>
-                <Text style={[styles.headerSubtitle, { color: colors.cream }]}>{t('appSubtitle')}</Text>
+              <View style={styles.titleContent}>
+                <Book
+                  color={theme === 'light' ? colors.gold : colors.cream}
+                  size={32}
+                  strokeWidth={2.5}
+                />
+                <View style={styles.titleTextContainer}>
+                  <ThemedText
+                    style={[styles.headerTitle, { color: theme === 'light' ? colors.gold : colors.cream }]}
+                  >
+                    {t('appTitle')}
+                  </ThemedText>
+                  <ThemedText style={[styles.headerSubtitle, { color: colors.cream }]}>{t('appSubtitle')}</ThemedText>
+                </View>
               </View>
+
             </View>
-            <Text style={[styles.headerDescription, { color: colors.cream, opacity: 0.9 }]}>
-              {t('appDescription')}
-            </Text>
           </View>
         </View>
       </View>
@@ -98,10 +120,26 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.statsContainer}>
-          <Text style={[styles.statsText, { color: colors.accent, opacity: 0.8 }]}>
+          <ThemedText style={[styles.statsText, { color: colors.accent, opacity: 0.8 }]}>
             {filteredHymns.length}{' '}
             {filteredHymns.length === 1 ? t('songCount') : t('songsCount')}
-          </Text>
+          </ThemedText>
+
+          <TouchableOpacity
+            style={[styles.sortButton, { backgroundColor: colors.accent + '10', borderColor: colors.accent + '30' }]}
+            onPress={() => {
+              if (Platform.OS !== 'web') {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+              }
+              setSortOrder(sortOrder === 'custom' ? 'numerical' : 'custom');
+            }}
+            activeOpacity={0.7}
+          >
+            <ArrowDownUp color={colors.accent} size={14} strokeWidth={2} />
+            <ThemedText style={[styles.sortButtonText, { color: colors.accent }]}>
+              {sortOrder === 'custom' ? t('sortNumerical') : t('sortCustom')}
+            </ThemedText>
+          </TouchableOpacity>
         </View>
 
         <FlatList
@@ -139,6 +177,12 @@ const styles = StyleSheet.create({
     gap: 12,
     marginBottom: 8,
   },
+  titleContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    flex: 1,
+  },
   titleTextContainer: {
     flex: 1,
   },
@@ -152,9 +196,19 @@ const styles = StyleSheet.create({
     marginTop: 2,
     fontWeight: '500' as const,
   },
-  headerDescription: {
-    fontSize: 14,
-    opacity: 0.9,
+  sortButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.3)',
+  },
+  sortButtonText: {
+    fontSize: 12,
+    fontWeight: '700' as const,
   },
   content: {
     flex: 1,
@@ -184,6 +238,9 @@ const styles = StyleSheet.create({
   statsContainer: {
     paddingHorizontal: 20,
     paddingVertical: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   statsText: {
     fontSize: 14,
@@ -192,68 +249,5 @@ const styles = StyleSheet.create({
   listContainer: {
     paddingHorizontal: 20,
     paddingBottom: 20,
-  },
-  hymnCard: {
-    borderRadius: 16,
-    marginBottom: 16,
-    borderWidth: 1.5,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 1,
-    shadowRadius: 8,
-    elevation: 4,
-    overflow: 'hidden',
-  },
-  cardContent: {
-    flexDirection: 'row',
-    padding: 20,
-  },
-  cardDecoration: {
-    position: 'absolute' as const,
-    top: 0,
-    right: 0,
-    width: 80,
-    height: 80,
-    opacity: 0.1,
-    transform: [{ rotate: '45deg' }, { translateX: 40 }, { translateY: -40 }],
-  },
-  hymnNumber: {
-    width: 56,
-    height: 56,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  hymnNumberText: {
-    fontSize: 22,
-    fontWeight: '800' as const,
-    letterSpacing: -0.5,
-  },
-  hymnContent: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  hymnTitle: {
-    fontSize: 17,
-    fontWeight: '700' as const,
-    marginBottom: 6,
-    lineHeight: 24,
-    letterSpacing: -0.2,
-  },
-  translationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  translationLabel: {
-    fontSize: 14,
-    fontWeight: '700' as const,
-  },
-  hymnTranslation: {
-    fontSize: 14,
-    fontWeight: '500' as const,
-    fontStyle: 'italic' as const,
-    opacity: 0.85,
-    flex: 1,
   },
 });

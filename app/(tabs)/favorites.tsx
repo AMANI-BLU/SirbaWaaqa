@@ -1,4 +1,5 @@
 import { HymnCard } from '@/components/HymnCard';
+import { ThemedText } from '@/components/ThemedText';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -6,13 +7,11 @@ import { hymns } from '@/mocks/hymns';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
 import { Book, Heart } from 'lucide-react-native';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import {
   FlatList,
   Platform,
-  StatusBar,
   StyleSheet,
-  Text,
   View
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -40,26 +39,24 @@ export default function FavoritesScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
-      <StatusBar barStyle={theme === 'light' ? 'dark-content' : 'light-content'} />
       <View style={[styles.headerContainer, { backgroundColor: colors.accent }]}>
-        <View style={[styles.headerPadding, { paddingTop: insets.top + 16, backgroundColor: colors.accent }]}>
+        <View style={[styles.headerPadding, { paddingTop: Math.max(insets.top, 24) + 16, backgroundColor: colors.accent }]}>
           <View style={styles.header}>
             <View style={styles.titleContainer}>
               <Heart
                 color={theme === 'light' ? colors.gold : colors.cream}
-                size={32}
+                size={24}
                 strokeWidth={2}
               />
               <View style={styles.titleTextContainer}>
-                <Text
+                <ThemedText
                   style={[
                     styles.headerTitle,
                     { color: theme === 'light' ? colors.gold : colors.cream }
                   ]}
                 >
                   {t('favorites')}
-                </Text>
-                <Text style={[styles.headerSubtitle, { color: colors.cream }]}>{t('savedSongs')}</Text>
+                </ThemedText>
               </View>
             </View>
           </View>
@@ -70,18 +67,18 @@ export default function FavoritesScreen() {
         {favoriteHymns.length === 0 ? (
           <View style={styles.emptyState}>
             <Book color={colors.border} size={64} strokeWidth={1.5} />
-            <Text style={[styles.emptyTitle, { color: colors.text }]}>{t('noFavorites')}</Text>
-            <Text style={[styles.emptyDescription, { color: colors.secondaryText }]}>
+            <ThemedText style={[styles.emptyTitle, { color: colors.text }]}>{t('noFavorites')}</ThemedText>
+            <ThemedText style={[styles.emptyDescription, { color: colors.secondaryText }]}>
               {t('noFavoritesDesc')}
-            </Text>
+            </ThemedText>
           </View>
         ) : (
           <>
             <View style={styles.statsContainer}>
-              <Text style={[styles.statsText, { color: colors.accent, opacity: 0.8 }]}>
+              <ThemedText style={[styles.statsText, { color: colors.accent, opacity: 0.8 }]}>
                 {favoriteHymns.length}{' '}
                 {favoriteHymns.length === 1 ? t('favoriteCountSingle') : t('favoriteCount')}
-              </Text>
+              </ThemedText>
             </View>
 
             <FlatList
@@ -107,13 +104,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    paddingBottom: 24,
+    paddingBottom: 16,
   },
   headerPadding: {
   },
   header: {
     paddingHorizontal: 20,
-    paddingTop: 16,
+    paddingTop: 8,
   },
   titleContainer: {
     flexDirection: 'row',
@@ -124,14 +121,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerTitle: {
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: '700' as const,
     letterSpacing: 0.5,
-  },
-  headerSubtitle: {
-    fontSize: 16,
-    marginTop: 2,
-    fontWeight: '500' as const,
   },
   content: {
     flex: 1,

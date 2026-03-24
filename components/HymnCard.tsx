@@ -1,3 +1,4 @@
+import { ThemedText } from '@/components/ThemedText';
 import { useTheme } from '@/contexts/ThemeContext';
 import { hymns } from '@/mocks/hymns';
 import { Heart } from 'lucide-react-native';
@@ -5,7 +6,6 @@ import React, { useEffect, useRef } from 'react';
 import {
     Animated,
     StyleSheet,
-    Text,
     TouchableOpacity,
     View,
 } from 'react-native';
@@ -72,20 +72,20 @@ const HymnCardComponent = ({ item, index, onPress, isFavorite = false }: HymnCar
             >
                 <View style={styles.cardContent}>
                     <View style={[styles.hymnNumber, { backgroundColor: colors.accent }]}>
-                        <Text style={[styles.hymnNumberText, { color: colors.cardBackground }]}>
+                        <ThemedText style={[styles.hymnNumberText, { color: colors.cardBackground }]}>
                             {item.number}
-                        </Text>
+                        </ThemedText>
                     </View>
                     <View style={styles.hymnContent}>
-                        <Text style={[styles.hymnTitle, { color: colors.text }]} numberOfLines={2}>
+                        <ThemedText style={[styles.hymnTitle, { color: colors.text }]} numberOfLines={2}>
                             {item.title}
-                        </Text>
+                        </ThemedText>
                         {item.englishTranslation && (
                             <View style={styles.translationContainer}>
-                                <Text style={[styles.translationLabel, { color: colors.accent, opacity: 0.6 }]}>•</Text>
-                                <Text style={[styles.hymnTranslation, { color: colors.accent }]} numberOfLines={1}>
+                                <ThemedText style={[styles.translationLabel, { color: colors.accent, opacity: 0.6 }]}>•</ThemedText>
+                                <ThemedText style={[styles.hymnTranslation, { color: colors.accent }]} numberOfLines={1}>
                                     {item.englishTranslation}
-                                </Text>
+                                </ThemedText>
                             </View>
                         )}
                     </View>
