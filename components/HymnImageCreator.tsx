@@ -55,6 +55,7 @@ export function HymnImageCreator({ visible, onClose, hymn, initialLyrics, colors
     const [editableLyrics, setEditableLyrics] = useState(initialLyrics && initialLyrics.trim() !== "" ? initialLyrics : fullLyrics);
     const [isSaving, setIsSaving] = useState(false);
     const [activeTab, setActiveTab] = useState<'bg' | 'style' | 'blur'>('bg');
+    const [selectedFont, setSelectedFont] = useState<'Outfit' | 'Inter' | 'Poppins' | 'System'>('Outfit');
 
     // Update lyrics when modal opens with new selection
     useEffect(() => {
@@ -159,7 +160,9 @@ export function HymnImageCreator({ visible, onClose, hymn, initialLyrics, colors
                                 </View>
 
                                 {/* Title */}
-                                <Text style={styles.cardTitle}>{hymn.title}</Text>
+                                <Text style={[styles.cardTitle, {
+                                    fontFamily: selectedFont === 'Inter' ? 'Inter_700Bold' : selectedFont === 'Poppins' ? 'Poppins_700Bold' : selectedFont === 'System' ? undefined : 'Outfit_700Bold'
+                                }]}>{hymn.title}</Text>
 
                                 {/* Elegant Divider */}
                                 <View style={styles.elegantDivider}>
@@ -170,7 +173,10 @@ export function HymnImageCreator({ visible, onClose, hymn, initialLyrics, colors
 
                                 {/* Context badge */}
                                 <View style={[styles.numberBadge, { backgroundColor: colors.gold + '20' }]}>
-                                    <Text style={[styles.numberText, { color: colors.gold }]}>DAILY VERSE</Text>
+                                    <Text style={[styles.numberText, {
+                                        color: colors.gold,
+                                        fontFamily: selectedFont === 'Inter' ? 'Inter_700Bold' : selectedFont === 'Poppins' ? 'Poppins_700Bold' : selectedFont === 'System' ? undefined : 'Outfit_700Bold'
+                                    }]}>DAILY VERSE</Text>
                                 </View>
 
                                 {/* ✅ Editable lyrics TextInput */}
@@ -179,7 +185,12 @@ export function HymnImageCreator({ visible, onClose, hymn, initialLyrics, colors
                                     onChangeText={setEditableLyrics}
                                     multiline
                                     scrollEnabled={false}
-                                    style={[styles.cardLyrics, { fontSize, lineHeight: fontSize * 1.6, textAlign }]}
+                                    style={[styles.cardLyrics, {
+                                        fontSize,
+                                        lineHeight: fontSize * 1.6,
+                                        textAlign,
+                                        fontFamily: selectedFont === 'Inter' ? 'Inter_400Regular' : selectedFont === 'Poppins' ? 'Poppins_400Regular' : selectedFont === 'System' ? undefined : 'Outfit_500Medium'
+                                    }]}
                                     placeholderTextColor="rgba(255,255,255,0.4)"
                                     placeholder="Type or paste lyrics…"
                                 />
@@ -310,14 +321,22 @@ export function HymnImageCreator({ visible, onClose, hymn, initialLyrics, colors
                                     </TouchableOpacity>
                                 </View>
 
-                                <View style={styles.presetNumbers}>
-                                    {[12, 14, 16, 18, 20].map((num) => (
+                                <Text style={[styles.sliderLabel, { color: colors.text + 'b0', marginTop: 12 }]}>Font Family</Text>
+                                <View style={styles.fontGrid}>
+                                    {([
+                                        { id: 'Outfit', label: 'Outfit' },
+                                        { id: 'Inter', label: 'Inter' },
+                                        { id: 'Poppins', label: 'Poppins' },
+                                        { id: 'System', label: 'System' }
+                                    ] as const).map((font) => (
                                         <TouchableOpacity
-                                            key={num}
-                                            style={[styles.presetNum, fontSize === num ? { backgroundColor: colors.accent } : { backgroundColor: colors.cardBackground }]}
-                                            onPress={() => setFontSize(num)}
+                                            key={font.id}
+                                            style={[styles.presetNum, selectedFont === font.id ? { backgroundColor: colors.accent } : { backgroundColor: colors.cardBackground }]}
+                                            onPress={() => setSelectedFont(font.id)}
                                         >
-                                            <Text style={[styles.presetNumText, fontSize === num ? { color: isDark ? '#000000' : '#ffffff' } : { color: colors.text, opacity: 0.7 }]}>{num}</Text>
+                                            <Text style={[styles.presetNumText, selectedFont === font.id ? { color: isDark ? '#000000' : '#ffffff' } : { color: colors.text, opacity: 0.7 }]}>
+                                                {font.label}
+                                            </Text>
                                         </TouchableOpacity>
                                     ))}
                                 </View>
@@ -563,6 +582,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginBottom: 16,
         textAlign: 'center',
+    },
+    fontGrid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 8,
     },
     sliderRow: {
         flexDirection: 'row',

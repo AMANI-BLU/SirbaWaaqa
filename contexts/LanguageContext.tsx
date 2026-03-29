@@ -47,8 +47,14 @@ const translations: Translations = {
   languageEnglish: { en: 'English', om: 'Ingiliffaa' },
   languageOromo: { en: 'Afan Oromo', om: 'Afaan Oromoo' },
 
+  appFont: { en: 'App Font', om: 'Bifata Qubee' },
+  fontOutfit: { en: 'Outfit (Default)', om: 'Outfit (Dhaabbata)' },
+  fontInter: { en: 'Inter (Clean)', om: 'Inter (Qulqulluu)' },
+  fontPoppins: { en: 'Poppins (Modern)', om: 'Poppins (Amayyaa)' },
+  fontSystem: { en: 'System Default', om: 'Dhaabbata Sirnaa' },
+
   aboutApp: { en: 'About This App', om: 'Waaʼee Appii Kanaa' },
-  aboutDesc: { en: 'Waaqa Faarsina is a digital Oromo (Borana) hymn book. This app makes gospel songs used in worship easily accessible. It is suitable for congregations and individuals to use during worship services or for personal prayer.', om: 'Waaqa Faarsina kitaaba faarfannaa dijitaalaa Afaan Oromoo (Booranaa) ti. Appiin kun faarfannoota wangeelaa waaqeffannaa keessatti fayyadaman salphaatti akka argaman taasisa. Waldoonii fi namoota dhuunfaa waaqeffannaa keessatti ykn kadhannaa dhuunfaatiif fayyadamuuf mijataa dha.' },
+  aboutDesc: { en: 'Waaqa Faarsina is built in memory of gospel fathers and mothers who spread the gospel in Borana. They used the manual hymn book as a spiritual tool for songs. Our mission is to digitalize this sacred book and make it accessible to everyone, ensuring these spiritual songs are preserved for generations.', om: 'Waaqa Faarsinaa kan ijaarame yaadannoo abbootii fi haadhota wangeelaa Boorana keessatti wangeela babal\'isaniitiif. Isaan kitaaba faarfannaa harkaa akka meeshaa hafuuraatti tajaajilamaa turan. Kaayyoon keenya kitaaba qulqulluu kana gara dijitaalaatti jijjiiruun hundaaf akka dandaʼamu taasisuu fi faarfannaa hafuuraa dhalootaaf tursiisuu dha.' },
 
   features: { en: 'Features', om: 'Amaloota' },
   featureLibraryTitle: { en: 'Complete Hymn Book', om: 'Kitaaba Faarfannaa Guutuu' },
@@ -68,8 +74,8 @@ const translations: Translations = {
   sortNumerical: { en: 'Numerical Order', om: 'Lakkoofsaan' },
   sortCustom: { en: 'Default Order', om: 'Hubannoo Dhaabbataa' },
 
-  footer: { en: 'We hope this app will serve as a tool for worship and spiritual growth in the Oromo community. May God bless you!', om: 'Appiin kun meeshaa waaqeffannaa fi guddina hafuuraa Oromoo keessatti akka taʼu abdii qabna. Waaqayyoo isin haa eebbisu!' },
-  blessing: { en: '✝ God bless you ✝', om: '✝ Waaqayyoo si haa eebbisu ✝' },
+  footer: { en: 'Waaqa Faarsina is built in memory of gospel fathers and mothers who spread the gospel in Borana. They used the manual hymn book as a spiritual tool for songs. Our mission is to digitalize this sacred book and make it accessible to everyone, ensuring these spiritual songs are preserved for generations.', om: 'Waaqa Faarsinaa kan ijaarame yaadannoo abbootii fi haadhota wangeelaa Boorana keessatti wangeela babal\'isaniitiif. Isaan kitaaba faarfannaa harkaa akka meeshaa hafuuraatti tajaajilamaa turan. Kaayyoon keenya kitaaba qulqulluu kana gara dijitaalaatti jijjiiruun hundaaf akka dandaʼamu taasisuu fi faarfannaa hafuuraa dhalootaaf tursiisuu dha.' },
+  blessing: { en: '✝ God bless you ✝', om: '✝ Waaqayyoo isin haa eebbisu ✝' },
 };
 
 export const [LanguageProvider, useLanguage] = createContextHook(() => {

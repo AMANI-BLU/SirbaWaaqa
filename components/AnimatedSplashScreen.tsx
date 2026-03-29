@@ -80,7 +80,7 @@ export const AnimatedSplashScreen: React.FC<Props> = ({ onAnimationComplete, onR
                 </Animated.View>
                 <Animated.View style={[styles.footer, textStyle]}>
                     <Text style={[styles.brandTitle, { color: titleColor }]}>Waaqa Faarsina</Text>
-                    <Text style={[styles.brandSubtitle, { color: subtitleColor }]}>Afan Oromo Gospel Hymns</Text>
+                    <Text style={[styles.brandSubtitle, { color: subtitleColor }]}>Gospel Song</Text>
                 </Animated.View>
             </View>
         </Animated.View>

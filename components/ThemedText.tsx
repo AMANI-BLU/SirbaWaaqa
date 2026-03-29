@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps, StyleSheet } from 'react-native';
+import { Text as RNText, StyleSheet, TextProps } from 'react-native';
 
-export type ThemedTextProps = RNTextProps;
+export type ThemedTextProps = TextProps;
 
 export function ThemedText({ style, ...rest }: ThemedTextProps) {
   const flatStyle = StyleSheet.flatten(style) || {};
   const weight = flatStyle.fontWeight?.toString() || '400';
-  
+
   let fontFamily = 'Outfit_400Regular';
 
   if (weight === '500') fontFamily = 'Outfit_500Medium';

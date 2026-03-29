@@ -1,6 +1,7 @@
 import { ThemedText } from '@/components/ThemedText';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import { FontAwesome, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import {
   ChevronRight,
   Globe,
@@ -163,9 +164,6 @@ export default function SettingsScreen() {
 
         {/* Blessing Footer */}
         <View style={styles.footer}>
-          <Text style={[styles.footerText, { color: colors.secondaryText }]}>
-            {t('footer')}
-          </Text>
           <Text style={[styles.blessingText, { color: colors.richGreen }]}>
             {t('blessing')}
           </Text>
@@ -183,7 +181,7 @@ export default function SettingsScreen() {
             <ThemedText style={[styles.modalVersion, { color: colors.secondaryText }]}>Version 1.0.0</ThemedText>
             <View style={[styles.modalDivider, { backgroundColor: colors.gold }]} />
             <Text style={[styles.modalText, { color: colors.text }]}>
-              {t('footer')}
+              {t('aboutDesc')}
             </Text>
             <TouchableOpacity style={[styles.modalCloseBtn, { backgroundColor: colors.accent }]} onPress={() => setAboutVisible(false)}>
               <Text style={styles.modalCloseText}>Close</Text>
@@ -205,9 +203,25 @@ export default function SettingsScreen() {
               style={[styles.contactBtn, { borderColor: colors.accent }]}
               onPress={() => handleLink('mailto:solomonamanuel66@gmail.com')}
             >
-              <Mail color={colors.accent} size={18} />
+              <MaterialCommunityIcons name="email-outline" color={colors.accent} size={20} />
               <Text style={[styles.contactBtnText, { color: colors.accent }]}>solomonamanuel66@gmail.com</Text>
             </TouchableOpacity>
+
+            <View style={styles.socialContainer}>
+              <TouchableOpacity onPress={() => handleLink('https://facebook.com/aman.amani.568632')} style={[styles.socialIcon, { backgroundColor: colors.accent + '10' }]}>
+                <FontAwesome name="facebook" color={colors.accent} size={24} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleLink('https://t.me/amancil')} style={[styles.socialIcon, { backgroundColor: colors.accent + '10' }]}>
+                <FontAwesome name="telegram" color={colors.accent} size={24} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleLink('https://www.linkedin.com/in/amanibluz/')} style={[styles.socialIcon, { backgroundColor: colors.accent + '10' }]}>
+                <FontAwesome name="linkedin" color={colors.accent} size={24} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleLink('https://www.tiktok.com/@amancil_')} style={[styles.socialIcon, { backgroundColor: colors.accent + '10' }]}>
+                <FontAwesome5 name="tiktok" color={colors.accent} size={22} />
+              </TouchableOpacity>
+            </View>
+
             <TouchableOpacity style={[styles.modalCloseBtn, { backgroundColor: colors.accent, marginTop: 24 }]} onPress={() => setDeveloperVisible(false)}>
               <Text style={styles.modalCloseText}>Close</Text>
             </TouchableOpacity>
@@ -400,5 +414,19 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginBottom: 12,
     textAlign: 'center',
+  },
+  socialContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 16,
+    marginTop: 20,
+    width: '100%',
+  },
+  socialIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

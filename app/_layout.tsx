@@ -15,6 +15,10 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { SettingsProvider } from '@/contexts/SettingsContext';
 import {
+  Inter_400Regular,
+  Inter_700Bold,
+} from '@expo-google-fonts/inter';
+import {
   Outfit_400Regular,
   Outfit_500Medium,
   Outfit_600SemiBold,
@@ -22,6 +26,12 @@ import {
   Outfit_800ExtraBold,
   useFonts
 } from '@expo-google-fonts/outfit';
+import {
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+} from '@expo-google-fonts/poppins';
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 SplashScreen.preventAutoHideAsync();
@@ -89,7 +99,13 @@ export default function RootLayout() {
     Outfit_500Medium,
     Outfit_600SemiBold,
     Outfit_700Bold,
-    Outfit_800ExtraBold
+    Outfit_800ExtraBold,
+    Inter_400Regular,
+    Inter_700Bold,
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
   });
 
   // Note: SplashScreen.hideAsync() is now handled by the custom AnimatedSplashScreen onReady callback
